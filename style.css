@@ -1,0 +1,43 @@
+img {
+    display:block;
+    margin:auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+#distancia {
+    margin-left: 57px;
+}
+
+#tetha {
+    margin-left: 62px;
+}
+
+button {
+    margin-left: 106px;
+}
+
+form h2 {
+    margin-left: 158px;
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 25px;
+    width: fit-content ;
+  }
+  
+
+td, th {
+    border: 1px solid black;
+    font-size: x-large;
+  }
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
