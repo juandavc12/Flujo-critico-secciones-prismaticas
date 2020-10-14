@@ -17,7 +17,7 @@ $rectangular.on('click', () => {
                         <input type="number" id="caudal" autocomplete="off"> <br> <br>
                         <strong>Base (m): </strong>
                         <input type="number" id="base" autocomplete="off"> <br> <br>
-                        <button type="submit" id="send">CALCULAR</button> 
+                        <button type="submit" id="send"><strong>CALCULAR</strong></button> 
                     </form>   
     
                     <table class="graficas">
@@ -39,6 +39,7 @@ const $send = $("#send");
 
 // Evento boton
 $send.on('click', () => {
+    $("html, body").animate({ scrollTop: $('html, body').prop("scrollHeight")}, 1000) //Scroll abajo
     event.preventDefault();
     let output = "";
     const caudal = parseFloat($caudal.val());
@@ -135,6 +136,7 @@ const $send = $("#send");
 
 // Evento boton
 $send.on('click', () => {
+    $("html, body").animate({ scrollTop: $('html, body').prop("scrollHeight")}, 1000) //Scroll abajo
     event.preventDefault();
     let output = "";
     const caudal = parseFloat($caudal.val());
@@ -235,6 +237,7 @@ const $send = $("#send");
 
 // Evento boton
 $send.on('click', () => {
+    $("html, body").animate({ scrollTop: $('html, body').prop("scrollHeight")}, 1000) //Scroll abajo
     event.preventDefault();
     let output = "";
     const caudal = parseFloat($caudal.val());
@@ -335,6 +338,7 @@ const $send = $("#send");
 
 // Evento boton
 $send.on('click', () => {
+    $("html, body").animate({ scrollTop: $('html, body').prop("scrollHeight")}, 1000) //Scroll abajo
     event.preventDefault();
     let output = "";
     const caudal = parseFloat($caudal.val());
@@ -438,6 +442,7 @@ const $send = $("#send");
 
 // Evento boton
 $send.on('click', () => {
+    $("html, body").animate({ scrollTop: $('html, body').prop("scrollHeight")}, 1000) //Scroll abajo
     event.preventDefault();
     let output = "";
     const caudal = parseFloat($caudal.val());
@@ -540,9 +545,10 @@ const $send = $("#send");
 
 // Evento boton
 $send.on('click', () => {
+    $("html, body").animate({ scrollTop: $('html, body').prop("scrollHeight")}, 1000)
     event.preventDefault();
     let output = "";
-    let newton = "";
+
     const caudal = parseFloat($caudal.val());
     const diametro = parseFloat($diametro.val());
     const tetha = parseFloat($tetha.val());    
@@ -606,7 +612,9 @@ $send.on('click', () => {
     </table>`
 
 $('#tabla').html(output);
+
 });
+
 
 });
 

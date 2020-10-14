@@ -18,12 +18,9 @@ h1 {
     width: 90px;
 }
 
-#diametro {
-    margin-left: 57px;
-}
-
-#tetha {
-    margin-left: 62px;
+.input form{
+display: flex;
+flex-direction: column;
 }
 
 form button {
@@ -47,9 +44,11 @@ td, th {
   }
 
 .container {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 125px;
 }
 
 .input {
@@ -58,5 +57,10 @@ td, th {
 }
 
 .graficas {
-    margin-left: 15%;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
