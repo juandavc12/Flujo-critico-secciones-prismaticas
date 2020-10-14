@@ -7,38 +7,35 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <img src="/Imagen.png" id="image">
-    </div>
+    
+        <img src="/Imagenes/Imagen.png" id="image">
+    
     <h1>Cálculo de la profundidad crítica secciones prismáticas</h1><br>
 
-    <form>
-        <h2>Input:</h2>
-        <strong>Caudal (m3/s): </strong>
-        <input type="number" id="caudal" autocomplete="off"> <br> <br>
-        <strong>D (m): </strong>
-        <input type="number" id="diametro" autocomplete="off"> <br> <br>
-        <strong>tetha: </strong>
-        <input type="number" id="tetha" autocomplete="off"> <br> <br>
-        <button type="submit" id="send">CALCULAR</button> 
-    </form>
+    <div class="select">
+      <button type="button" id="rectangular"><strong>Rectangular</strong></button>
+      <button type="button" id="triangular"><strong>Triangular</strong></button>
+      <button type="button" id="triangularAsimetrico"><strong>Triangular asimetrico</strong></button>
+      <button type="button" id="trapezoidal"><strong>Trapezoidal</strong></button>
+      <button type="button" id="trapezoidalAsimetrico"><strong>Trapezoidal asimetrico</strong></button>
+      <button type="button" id="circular"><strong>Circular</strong></button>
+      <button type="button" id="parabolico"><strong>Parabólico</strong></button>
+    </div>
+
+    <div class="input"></div>
 
     <div class="container">
 
-      <div id="tabla"></div>
+      <div id="tabla">
+        
+      </div>
    
 
-      <table>
-          <th>Canal circular:</th>
+      
 
-          <tr>
-              <td><img src="grafica.png"></td>
-              <td><img src="canal.png"></td>
-          </tr>
-      </table>
-
-      <table class="newtonR">
-        <h1>Newton Raphson - Cáculo profundidad crítica:</h1>
+      <!-- <div>
+        <table id="newtonR">
+          <h1>Newton Raphson - Cáculo profundidad crítica:</h1>
 
           <tr>
               <th>yc (m)</th>
@@ -51,142 +48,8 @@
               <th>Newton Raphson</th>
           </tr>
 
-          <tr>
-            <td id="yc1">yc (m)</td>
-            <td id="Ac1">Ac (m2)</td>
-            <td id="dAc1">dAc/dyc</td>
-            <td id="T1">T (m)</td>
-            <td id="dTc1">dTc/dyc</td>
-            <td id="fyc1">f(yc)</td>
-            <td id="fYc1">f´(yc)</td>
-            <td id="newton1">Newton Raphson</td>
-          </tr>
-
-          <tr>
-            <td id="yc2">yc (m)</td>
-            <td id="Ac2">Ac (m2)</td>
-            <td id="dAc2">dAc/dyc</td>
-            <td id="T2">T (m)</td>
-            <td id="dTc2">dTc/dyc</td>
-            <td id="fyc2">f(yc)</td>
-            <td id="fYc2">f´(yc)</td>
-            <td id="newton2">Newton Raphson</td>
-          </tr>
-
-          <tr>
-            <td id="yc3">yc (m)</td>
-            <td id="Ac3">Ac (m2)</td>
-            <td id="dAc3">dAc/dyc</td>
-            <td id="T3">T (m)</td>
-            <td id="dTc3">dTc/dyc</td>
-            <td id="fyc3">f(yc)</td>
-            <td id="fYc3">f´(yc)</td>
-            <td id="newton3">Newton Raphson</td>
-          </tr>
-
-          <tr>
-            <td id="yc4">yc (m)</td>
-            <td id="Ac4">Ac (m2)</td>
-            <td id="dAc4">dAc/dyc</td>
-            <td id="T4">T (m)</td>
-            <td id="dTc4">dTc/dyc</td>
-            <td id="fyc4">f(yc)</td>
-            <td id="fYc4">f´(yc)</td>
-            <td id="newton4">Newton Raphson</td>
-          </tr>
-
-          <tr>
-            <td id="yc5">yc (m)</td>
-            <td id="Ac5">Ac (m2)</td>
-            <td id="dAc5">dAc/dyc</td>
-            <td id="T5">T (m)</td>
-            <td id="dTc5">dTc/dyc</td>
-            <td id="fyc5">f(yc)</td>
-            <td id="fYc5">f´(yc)</td>
-            <td id="newton5">Newton Raphson</td>
-          </tr>
-
-          <tr>
-            <td id="yc6">yc (m)</td>
-            <td id="Ac6">Ac (m2)</td>
-            <td id="dAc6">dAc/dyc</td>
-            <td id="T6">T (m)</td>
-            <td id="dTc6">dTc/dyc</td>
-            <td id="fyc6">f(yc)</td>
-            <td id="fYc6">f´(yc)</td>
-            <td id="newton6">Newton Raphson</td>
-          </tr>
-
-          <tr>
-            <td id="yc7">yc (m)</td>
-            <td id="Ac7">Ac (m2)</td>
-            <td id="dAc7">dAc/dyc</td>
-            <td id="T7">T (m)</td>
-            <td id="dTc7">dTc/dyc</td>
-            <td id="fyc7">f(yc)</td>
-            <td id="fYc7">f´(yc)</td>
-            <td id="newton7">Newton Raphson</td>
-          </tr>
-
-          <tr>
-            <td id="yc8">yc (m)</td>
-            <td id="Ac8">Ac (m2)</td>
-            <td id="dAc8">dAc/dyc</td>
-            <td id="T8">T (m)</td>
-            <td id="dTc8">dTc/dyc</td>
-            <td id="fyc8">f(yc)</td>
-            <td id="fYc8">f´(yc)</td>
-            <td id="newton8">Newton Raphson</td>
-          </tr>
-
-          <tr>
-            <td id="yc9">yc (m)</td>
-            <td id="Ac9">Ac (m2)</td>
-            <td id="dAc9">dAc/dyc</td>
-            <td id="T9">T (m)</td>
-            <td id="dTc9">dTc/dyc</td>
-            <td id="fyc9">f(yc)</td>
-            <td id="fYc9">f´(yc)</td>
-            <td id="newton9">Newton Raphson</td>
-          </tr>
-
-          <tr>
-            <td id="yc10">yc (m)</td>
-            <td id="Ac10">Ac (m2)</td>
-            <td id="dAc10">dAc/dyc</td>
-            <td id="T10">T (m)</td>
-            <td id="dTc10">dTc/dyc</td>
-            <td id="fyc10">f(yc)</td>
-            <td id="fYc10">f´(yc)</td>
-            <td id="newton10">Newton Raphson</td>
-          </tr>
-
-          <tr>
-            <td id="yc11">yc (m)</td>
-            <td id="Ac11">Ac (m2)</td>
-            <td id="dAc11">dAc/dyc</td>
-            <td id="T11">T (m)</td>
-            <td id="dTc11">dTc/dyc</td>
-            <td id="fyc11">f(yc)</td>
-            <td id="fYc11">f´(yc)</td>
-            <td id="newton11">Newton Raphson</td>
-          </tr>
-
-          <tr>
-            <td id="yc12">yc (m)</td>
-            <td id="Ac12">Ac (m2)</td>
-            <td id="dAc12">dAc/dyc</td>
-            <td id="T12">T (m)</td>
-            <td id="dTc12">dTc/dyc</td>
-            <td id="fyc12">f(yc)</td>
-            <td id="fYc12">f´(yc)</td>
-            <td id="newton12">Newton Raphson</td>
-          </tr>
-        
-      </table>
-
-    
-
+        </table>
+      </div> -->
     
   </div>
 
