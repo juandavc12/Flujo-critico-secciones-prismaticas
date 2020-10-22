@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
 
     // Selecciona el boton de cada cálculo
 const $rectangular = $("#rectangular");
@@ -42,18 +43,85 @@ $send.on('click', () => {
     $("html, body").animate({ scrollTop: $('html, body').prop("scrollHeight")}, 1000) //Scroll abajo
     event.preventDefault();
     const caudal = parseFloat($caudal.val());
-    const base = parseFloat($base.val());    
-    let Yc = 2.168;
+    const base = parseFloat($base.val());
+    let Yc = 5;
     let Ac = base * Yc;
-    let Pc = (Yc * 2) + base;
-    let Rc = Ac / Pc;   
+    let dAdY = base;
     let Tc = base;
+    let dTdY = 0;
+    let fYc = (9.81) * (Ac**3) * (Tc**-1) - (caudal**2)
+    let f_yc = (9.81) * ((Ac**3) * (-1) * (Tc**-2) * dTdY + (Tc**-1) * 3 * (Ac**2) * dAdY)
+    // let newtonR = Yc - fYc / f_yc;
+    let Za = 3;
+    let Zb = 2.5
+
+// eval("Yc2="+newtonR)
+    // function newtonRaphson (Yc, Ac, dAdY, Tc, dTdY, fYc, f_yc, newtonR) {
+    
+    // let i = 0;
+    // for (let n = 5 ; n !== newtonR ; i++){
+    //     eval("Yc"+i+"="+n)
+    //     Ac = base * eval("Yc"+i+"="+n);
+    //     dAdY = base;
+    //     Tc = base;
+    //     dTdY = 0;
+    //     fYc = (9.81) * (Ac**3) * (Tc**-1) - (caudal**2)
+    //     f_yc = (9.81) * ((Ac**3) * (-1) * (Tc**-2) * dTdY + (Tc**-1) * 3 * (Ac**2) * dAdY)
+    //     newtonR = eval("Yc"+i+"="+n) - fYc / f_yc;
+    //     n = newtonR
+    //     console.log(("Yc"+i+"="+n) + 'ciclando' + newtonR);
+    // }
+
+    function f(x) {
+        return(9.81*(0.5*Za*x**2+base*x+0.5*Zb*x**2)**3*(Za*x+base+Zb*x)**-1-caudal**2)
+    }
+
+    function Df(x){
+        return(9.81*(-1*(0.5*Za*x**2+base*x+0.5*Zb*x**2)**3*(Za*x+base+Zb*x)**-2*(Za+Zb)+3*(Za*x+base+Zb*x)**-1*(0.5*Za*x**2+base*x+0.5*Zb*x**2)**2*((Za*x+base+Zb*x))))
+    }
+
+    let x0 = 1
+     
+    for (let i = 1 ; i < 11 ; i++ ){
+        let x1 = x0-f(x0)/Df(x0);
+        x0 = x1;
+        console.log("iteracion"+ i + x0);
+    }
+    // Función objetivo f(hf)
+// def f(x):
+// return 9.81*(0.5*Za*x**2+b*x+0.5*Zb*x**2)**3*(Za*x+b+Zb*x)**-1-Q**2
+// Q=float(input("Digite caudal Q (m3/s): "))
+// b=float(input("Digite base del canal b (m): "))
+// Za=float(input("Digite talud Za: "))
+// Zb=float(input("Digite talud Zb: "))
+// # Primera derivada para f(hf)
+// def Df(x):
+// return 9.81*(-(0.5*Za*x**2+b*x+0.5*Zb*x**2)**3*(Za*x+b+Zb*x)**-2*(Za+Zb)
+// +3*(Za*x+b+Zb*x)**-1*(0.5*Za*x**2+b*x+0.5*Zb*x**2)**2*((Za*x+b+Zb*x)))
+// x0=1
+// i=1
+// for iteracion in range (1,11):
+// x1= x0-f(x0)/Df(x0)
+// x0=x1
+// print("iteracion", i,x0)
+// i=i+1
+            
+                
+
+
+        
+    // }
+
+    let Pc = (Yc * 2) + base;
+    let Rc = Ac / Pc;       
     let Dc = Ac / Tc;
     let Vc = caudal / Ac;
     let EE = (Yc + (Vc**2)) /(2*9.81);
-    let FO = (9.81*Ac**3*(Tc**(-1))) - (caudal**2)
-
+    let FO = (9.81*Ac**3*(Tc**(-1))) - (caudal**2);  
+    
+    // newtonRaphson(Yc, Ac, dAdY, Tc, dTdY, fYc, f_yc, newtonR)
     tableTemplate(FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE)
+    // console.log(newtonR)
 });
 });
 
@@ -245,18 +313,37 @@ $send.on('click', () => {
     $("html, body").animate({ scrollTop: $('html, body').prop("scrollHeight")}, 1000) //Scroll abajo
     event.preventDefault();
     const caudal = parseFloat($caudal.val());
-    const B = parseFloat($B.val()); 
+    const base = parseFloat($B.val()); 
     const Za = parseFloat($Za.val());    
     const Zb = parseFloat($Zb.val()); 
-    const Yc = Math.random()
-    const Ac = Math.random()
-    const Pc = Math.random()
-    const Rc = Math.random()    
-    const Tc = Math.random()
-    const Dc = Math.random()
-    const Vc = Math.random()
-    const EE = Math.random()
-    const FO = Math.random()
+    // const Yc = Math.random()
+
+
+    function f(x) {
+        return(9.81*(0.5*Za*x**2+base*x+0.5*Zb*x**2)**3*(Za*x+base+Zb*x)**-1-caudal**2)
+    }
+
+    function Df(x){
+        return(9.81*(-1*(0.5*Za*x**2+base*x+0.5*Zb*x**2)**3*(Za*x+base+Zb*x)**-2*(Za+Zb)+3*(Za*x+base+Zb*x)**-1*(0.5*Za*x**2+base*x+0.5*Zb*x**2)**2*((Za*x+base+Zb*x))))
+    }
+
+    let x0 = 1
+     
+    for (let i = 1 ; i < 20 ; i++ ){
+        let x1 = x0-f(x0)/Df(x0);
+        x0 = x1;
+        (eval("Yc="+x0))
+    }
+
+    let Tc = Za*Yc+Zb*Yc+base;
+    let Ac = base*Yc+((Za*(Yc**2)+Zb*(Yc**2))/2)
+    let Pc = (Yc*(Math.sqrt((Za**2)+1))+Yc*(Math.sqrt((Zb**2)+1)))+base
+    let Rc = Ac / Pc;       
+    let Dc = Ac / Tc;
+    let Vc = caudal / Ac;
+    let EE = Yc+Vc**2/(2*9.81)
+    let FO = ((9.81)*(Ac**3)*(Tc**-1)-(caudal**2)).toFixed(1)
+    console.log(FO)
 
     tableTemplate(FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE)
 });
@@ -394,31 +481,6 @@ function tableTemplate (FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE){
 
 $('#tabla').html(output);
 }
-
-
-    
-
-
-
-// for ( let i = 1 ; i<=12 ; i++ ) {
-//     newton += `<tr>
-//     <td>yc (m)</td>
-//     <td>Ac (m2)</td>
-//     <td>dAc/dyc</td>
-//     <td>T (m)</td>
-//     <td>dTc/dyc</td>
-//     <td>f(yc)</td>
-//     <td>f´(yc)</td>
-//     <td>Newton Raphson</td>
-//   </tr>`
-// }
-
-// $('#newtonR').append(newton);
-    
-// });
-
-
-
 
 
 
