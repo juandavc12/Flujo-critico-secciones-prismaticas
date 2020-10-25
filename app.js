@@ -110,16 +110,34 @@ $send.on('click', () => {
     $("html, body").animate({ scrollTop: $('html, body').prop("scrollHeight")}, 1000) //Scroll abajo
     event.preventDefault();
     const caudal = parseFloat($caudal.val());
-    const talud = parseFloat($talud.val());    
-    const Yc = Math.random()
-    const Ac = Math.random()
-    const Pc = Math.random()
-    const Rc = Math.random()    
-    const Tc = Math.random()
-    const Dc = Math.random()
-    const Vc = Math.random()
-    const EE = Math.random()
-    const FO = Math.random()
+    const Z = parseFloat($talud.val());   
+
+    function f(x) {
+        return(9.81*((Z*x**2)**3)*(2*Z*x)**-1-caudal**2)
+    }
+
+    function Df(x){
+        return(9.81*(-1*((Z*x**2)**3)*((2*Z*x)**-2)*(2*Z)+3*(2*Z*x)**-1*(Z*x**2)**2*(2*Z*x)))
+    }
+
+    let x0 = 1
+     
+    for (let i = 1 ; i < 20 ; i++ ){
+        let x1 = x0-f(x0)/Df(x0);
+        x0 = x1;
+        (eval("Yc="+x0))
+    }
+
+    let Tc = 2*Z*Yc;
+    let Ac = Z*Yc**2;
+    let Pc = 2*Yc*(Math.sqrt(Z**2+1))
+    let Rc = Ac/Pc;       
+    let Dc = Ac / Tc;
+    let Vc = caudal/Ac;
+    let EE = Yc+Vc**2/(2*9.81)
+    let FO = ((9.81)*(Ac**3)*(Tc**-1)-(caudal**2)).toFixed(1)
+    console.log(FO)
+    console.log(Yc)
 
     tableTemplate(FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE)
 });
@@ -163,15 +181,32 @@ $send.on('click', () => {
     const caudal = parseFloat($caudal.val());
     const Za = parseFloat($Za.val());    
     const Zb = parseFloat($Zb.val()); 
-    const Yc = Math.random()
-    const Ac = Math.random()
-    const Pc = Math.random()
-    const Rc = Math.random()    
-    const Tc = Math.random()
-    const Dc = Math.random()
-    const Vc = Math.random()
-    const EE = Math.random()
-    const FO = Math.random()
+
+    function f(x) {
+        return(9.81*(0.5*x**2*(Za+Zb))**3*(x*(Za+Zb))**-1-caudal**2)
+    }
+    
+    function Df(x){
+        return(9.81*(-1*(0.5*x**2*(Za+Zb))**3*(x*(Za+Zb))**-2*(Za+Zb)+3*(x*(Za+Zb))**-1*(0.5*x**2*(Za+Zb))**2*x*(Za+Zb)))
+    }
+
+    let x0 = 1
+     
+    for (let i = 1 ; i < 20 ; i++ ){
+        let x1 = x0-f(x0)/Df(x0);
+        x0 = x1;
+        (eval("Yc="+x0))
+    }
+
+    let Tc = Yc*(Za+Zb);
+    let Ac = 0.5*Yc**2*(Za+Zb);
+    let Pc = Yc*(Math.sqrt(Za**2+1)+Math.sqrt(Zb**2+1));
+    let Rc = Ac / Pc;       
+    let Dc = Ac / Tc;
+    let Vc = caudal / Ac;
+    let EE = Yc+Vc**2/(2*9.81)
+    let FO = ((9.81)*(Ac**3)*(Tc**-1)-(caudal**2)).toFixed(1)
+    console.log(FO)
 
     tableTemplate(FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE)
 });
@@ -212,17 +247,36 @@ $send.on('click', () => {
     $("html, body").animate({ scrollTop: $('html, body').prop("scrollHeight")}, 1000) //Scroll abajo
     event.preventDefault();
     const caudal = parseFloat($caudal.val());
-    const B = parseFloat($B.val());    
+    const base = parseFloat($B.val());    
     const Z = parseFloat($Z.val()); 
-    const Yc = Math.random()
-    const Ac = Math.random()
-    const Pc = Math.random()
-    const Rc = Math.random()    
-    const Tc = Math.random()
-    const Dc = Math.random()
-    const Vc = Math.random()
-    const EE = Math.random()
-    const FO = Math.random()
+    let Za = Z;
+    let Zb = 0;
+
+    function f(x) {
+        return(9.81*(0.5*Za*x**2+base*x+0.5*Zb*x**2)**3*(2*Z*x+base)**-1-caudal**2)
+    }
+
+    function Df(x){
+        return(9.81*(-1*(0.5*Za*x**2+base*x+0.5*Zb*x**2)**3*(2*Z*x+base)**-2*(Za+Zb)+3*(2*Z*x+base)**-1*(0.5*Za*x**2+base*x+0.5*Zb*x**2)**2*((2*Z*x+base))))
+    }
+
+    let x0 = 1
+     
+    for (let i = 1 ; i < 20 ; i++ ){
+        let x1 = x0-f(x0)/Df(x0);
+        x0 = x1;
+        (eval("Yc="+x0))
+    }
+    
+    let Tc = 2*Z*Yc+base
+    let Ac = base*Yc+((Za*(Yc**2)+Zb*(Yc**2))/2)
+    let Pc = (Yc*(Math.sqrt((Za**2)+1))+Yc*(Math.sqrt((Zb**2)+1)))+base
+    let Rc = Ac / Pc;       
+    let Dc = Ac / Tc;
+    let Vc = caudal / Ac;
+    let EE = Yc+Vc**2/(2*9.81)
+    let FO = ((9.81)*(Ac**3)*(Tc**-1)-(caudal**2)).toFixed(1)
+    console.log(FO)
 
     tableTemplate(FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE)
 });
@@ -309,7 +363,7 @@ $circular.on('click', () => {
                             <strong>D (m): </strong>
                             <input type="number" id="diametro" autocomplete="off"> <br> <br>
                             <strong>tetha: </strong>
-                            <input type="number" id="tetha" autocomplete="off"> <br> <br>
+                            <p>1.265</p> <br> <br>
                             <button type="submit" id="send">CALCULAR</button> 
                         </form>   
         
@@ -337,8 +391,9 @@ $send.on('click', () => {
     event.preventDefault();
     const caudal = parseFloat($caudal.val());
     const diametro = parseFloat($diametro.val());
-    const tetha = parseFloat($tetha.val());    
-    const Yc = Math.random();
+    const Yc = 1.67;
+    const tetha = 2*(Math.acos(1-(2*Yc)/diametro));
+    console.log(tetha)
     const Ac = ((diametro**2)/8) * (tetha-(Math.sin(tetha)));
     const Pc = (tetha * diametro) / 2;
     const Rc = Ac + Pc;    
