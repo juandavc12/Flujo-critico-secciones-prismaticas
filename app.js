@@ -24,8 +24,8 @@ $rectangular.on('click', () => {
                         <th>Canal rectangular:</th>
 
                         <tr>
-                            <td><img src="/imagenes/rectangular.png"></td>
-                            <td><img src="/imagenes/canalRectangular.jpg"></td>
+                            <td><img src="/Imagenes/rectangular.png"></td>
+                            <td><img src="/Imagenes/canalRectangular.jpg"></td>
                         </tr>
           
                     </table>`
@@ -94,8 +94,8 @@ $triangular.on('click', () => {
                         <th>Canal triangular:</th>
 
                         <tr>
-                            <td><img src="/imagenes/triangular.png"></td>
-                            <td><img src="/imagenes/canalTriangular.png"></td>
+                            <td><img src="/Imagenes/triangular.png"></td>
+                            <td><img src="/Imagenes/canalTriangular.png"></td>
                         </tr>
           
                     </table>`
@@ -162,8 +162,8 @@ $triangularAsimetrico.on('click', () => {
                         <th>Canal triangularAsimetrico:</th>
 
                         <tr>
-                            <td><img src="/imagenes/triangular.png"></td>
-                            <td><img src="/imagenes/canalTriangular.png"></td>
+                            <td><img src="/Imagenes/triangular.png"></td>
+                            <td><img src="/Imagenes/canalTriangular.png"></td>
                         </tr>
           
                     </table>`
@@ -233,8 +233,8 @@ $trapezoidal.on('click', () => {
                         <th>Canal trapezoidal:</th>
 
                         <tr>
-                            <td><img src="/imagenes/trapezoidal.png"></td>
-                            <td><img src="/imagenes/canalTrapezoidal.png"></td>
+                            <td><img src="/Imagenes/trapezoidal.png"></td>
+                            <td><img src="/Imagenes/canalTrapezoidal.png"></td>
                         </tr>
           
                     </table>`
@@ -306,8 +306,8 @@ $trapezoidalAsimetrico.on('click', () => {
                         <th>Canal trapezoidal asimetrico:</th>
 
                         <tr>
-                            <td><img src="/imagenes/trapezoidalAsimetrico.png"></td>
-                            <td><img src="/imagenes/canalTrapezoidal.png"></td>
+                            <td><img src="/Imagenes/trapezoidalAsimetrico.png"></td>
+                            <td><img src="/Imagenes/canalTrapezoidal.png"></td>
                         </tr>
           
                     </table>`
@@ -376,8 +376,8 @@ $circular.on('click', () => {
                             <th>Canal circular:</th>
     
                             <tr>
-                                <td><img src="/imagenes/circular.png"></td>
-                                <td><img src="/imagenes/canalCircular.png"></td>
+                                <td><img src="/Imagenes/circular.png"></td>
+                                <td><img src="/Imagenes/canalCircular.png"></td>
                             </tr>
               
                         </table>`
