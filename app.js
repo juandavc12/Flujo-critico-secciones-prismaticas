@@ -24,8 +24,8 @@ $rectangular.on('click', () => {
                         <th>Canal rectangular:</th>
 
                         <tr>
-                            <td><img src="/Imagenes/rectangular.png"></td>
-                            <td><img src="/Imagenes/canalRectangular.jpg"></td>
+                            <td><img src="/Imagenes/rectangular.PNG"></td>
+                            <td><img src="/Imagenes/canalRectangular.PNG"></td>
                         </tr>
           
                     </table>`
