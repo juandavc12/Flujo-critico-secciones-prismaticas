@@ -249,15 +249,14 @@ $send.on('click', () => {
     const caudal = parseFloat($caudal.val());
     const base = parseFloat($B.val());    
     const Z = parseFloat($Z.val()); 
-    let Za = Z;
-    let Zb = 0;
 
     function f(x) {
-        return(9.81*(0.5*Za*x**2+base*x+0.5*Zb*x**2)**3*(2*Z*x+base)**-1-caudal**2)
+        return(9.81*(x*((Z*x)+base))**3*((2*Z*x)+base)**-1*(caudal**2))
     }
+    
 
     function Df(x){
-        return(9.81*(-1*(0.5*Za*x**2+base*x+0.5*Zb*x**2)**3*(2*Z*x+base)**-2*(Za+Zb)+3*(2*Z*x+base)**-1*(0.5*Za*x**2+base*x+0.5*Zb*x**2)**2*((2*Z*x+base))))
+        return(9.81*(-2*Z*(x*(Z*x+base))**3*(2*Z*x+base)**-2+3*(2*Z*x+base)**-1*(x*(Z*x+base))**2*(2*Z*x+base)))
     }
 
     let x0 = 1
@@ -268,9 +267,9 @@ $send.on('click', () => {
         (eval("Yc="+x0))
     }
     
-    let Tc = 2*Z*Yc+base
-    let Ac = base*Yc+((Za*(Yc**2)+Zb*(Yc**2))/2)
-    let Pc = (Yc*(Math.sqrt((Za**2)+1))+Yc*(Math.sqrt((Zb**2)+1)))+base
+    let Tc = 2*Z*Yc+base;
+    let Ac = Yc*(Z*Yc+base);
+    let Pc = 2*Yc*(Math.sqrt(Z**2+1))+base
     let Rc = Ac / Pc;       
     let Dc = Ac / Tc;
     let Vc = caudal / Ac;
@@ -391,17 +390,26 @@ $send.on('click', () => {
     event.preventDefault();
     const caudal = parseFloat($caudal.val());
     const diametro = parseFloat($diametro.val());
-    const Yc = 1.67;
-    const tetha = 2*(Math.acos(1-(2*Yc)/diametro));
-    console.log(tetha)
-    const Ac = ((diametro**2)/8) * (tetha-(Math.sin(tetha)));
-    const Pc = (tetha * diametro) / 2;
-    const Rc = Ac + Pc;    
-    const Tc = diametro*(Math.sin(tetha/2));
-    const Dc = Ac - Tc;
-    const Vc = caudal / Ac;
-    const EE = (Yc + (Vc**2)) / (2*9.81);
-    const FO = (9.81 * (Ac**3) * (Tc**-1)) - (caudal**2);
+
+    let x0 = 1
+     
+    for (let i = 1 ; i < 20 ; i++ ){
+        let x1 = 2/diametro**2*((diametro*caudal**2/9.81)*Math.sin(x0))**(1/3)+(1/4)*Math.sin(2*x0)+0.5*(x0);
+        x0 = x1;
+        (eval("tetha="+x0))
+        console.log(tetha) 
+    }
+    
+    let Yc = (diametro/2)*(1-Math.cos(tetha))
+    let Tc = diametro*Math.sin(Yc/2);
+    let Ac = ((diametro**2)/8)*(Yc-Math.sin(Yc))
+    let Pc = Yc*diametro/2
+    let Rc = Yc / Pc;       
+    let Dc = Ac / Tc;
+    let Vc = caudal / Ac;
+    let EE = Yc+Vc**2/(2*9.81)
+    let FO = ((9.81)*(Ac**3)*(Tc**-1)-(caudal**2)).toFixed(1)
+    console.log(FO)    
 
     tableTemplate(FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE)
 });
@@ -431,6 +439,48 @@ $parabolico.on('click', () => {
                         </table>`
 
     $('.input').html(parabolico);
+
+        // Asignar variables a inputs
+const $caudal = $("#caudal");
+const $T = $("#T");
+const $send = $("#send");
+
+// Evento boton
+$send.on('click', () => {
+    $("html, body").animate({ scrollTop: $('html, body').prop("scrollHeight")}, 1000) //Scroll abajo
+    event.preventDefault();
+    const caudal = parseFloat($caudal.val());
+    const T = parseFloat($T.val());    
+
+    function f(x) {
+        return(9.81*((2/3)*T*x)**3*T**-1-caudal**2)
+    }
+    
+    function Df(x){
+        return(9.81*(2*T*((2/3)*T*x)**2))
+    }
+
+    let x0 = 1
+     
+    for (let i = 1 ; i < 20 ; i++ ){
+        let x1 = x0-f(x0)/Df(x0);
+        x0 = x1;
+        (eval("Yc="+x0))
+        console.log(Yc)
+    }
+
+    let Tc = T;
+    let Ac = (2/3)*T*Yc;
+    let Pc = Tc + ((8/3)*(Yc**2/Tc));
+    let Rc = Ac / Pc;       
+    let Dc = Ac / Tc;
+    let Vc = caudal / Ac;
+    let EE = Yc+Vc**2/(2*9.81)
+    let FO = ((9.81)*(Ac**3)*(Tc**-1)-(caudal**2)).toFixed(1)
+    
+
+    tableTemplate(FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE)
+});
 });
 
 function tableTemplate (FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE){
