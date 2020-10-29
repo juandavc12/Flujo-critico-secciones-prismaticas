@@ -8,7 +8,6 @@ const $triangularAsimetrico = $("#triangularAsimetrico");
 const $trapezoidal = $("#trapezoidal");
 const $trapezoidalAsimetrico = $("#trapezoidalAsimetrico");
 const $circular = $("#circular");
-const $parabolico = $("#parabolico");
 
 $rectangular.on('click', () => {
     let rectangular = "";
@@ -71,8 +70,10 @@ $send.on('click', () => {
     let Vc = caudal / Ac;
     let EE = Yc+Vc**2/(2*9.81)
     let FO = ((9.81)*(Ac**3)*(Tc**-1)-(caudal**2)).toFixed(1)
-    console.log(FO)
-
+    if (Math.sign(FO)===-1 || Math.sign(FO)===-0){
+        FO = FO * (-1);
+    } else {return(FO)}
+ 
     tableTemplate(FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE)
 
 });
@@ -136,8 +137,9 @@ $send.on('click', () => {
     let Vc = caudal/Ac;
     let EE = Yc+Vc**2/(2*9.81)
     let FO = ((9.81)*(Ac**3)*(Tc**-1)-(caudal**2)).toFixed(1)
-    console.log(FO)
-    console.log(Yc)
+    if (Math.sign(FO)===-1 || Math.sign(FO)===-0){
+        FO = FO * (-1);
+    } else {return(FO)}
 
     tableTemplate(FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE)
 });
@@ -206,7 +208,9 @@ $send.on('click', () => {
     let Vc = caudal / Ac;
     let EE = Yc+Vc**2/(2*9.81)
     let FO = ((9.81)*(Ac**3)*(Tc**-1)-(caudal**2)).toFixed(1)
-    console.log(FO)
+    if (Math.sign(FO)===-1 || Math.sign(FO)===-0){
+        FO = FO * (-1);
+    } else {return(FO)}
 
     tableTemplate(FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE)
 });
@@ -251,7 +255,7 @@ $send.on('click', () => {
     const Z = parseFloat($Z.val()); 
 
     function f(x) {
-        return(9.81*(x*((Z*x)+base))**3*((2*Z*x)+base)**-1*(caudal**2))
+        return(9.81*(x*((Z*x)+base))**3*((2*Z*x)+base)**-1-(caudal**2))
     }
     
 
@@ -275,7 +279,9 @@ $send.on('click', () => {
     let Vc = caudal / Ac;
     let EE = Yc+Vc**2/(2*9.81)
     let FO = ((9.81)*(Ac**3)*(Tc**-1)-(caudal**2)).toFixed(1)
-    console.log(FO)
+    if (Math.sign(FO)===-1 || Math.sign(FO)===-0){
+        FO = FO * (-1);
+    } else {return(FO)}
 
     tableTemplate(FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE)
 });
@@ -347,7 +353,9 @@ $send.on('click', () => {
     let Vc = caudal / Ac;
     let EE = Yc+Vc**2/(2*9.81)
     let FO = ((9.81)*(Ac**3)*(Tc**-1)-(caudal**2)).toFixed(1)
-    console.log(FO)
+    if (Math.sign(FO)===-1 || Math.sign(FO)===-0){
+        FO = FO * (-1);
+    } else {return(FO)}
 
     tableTemplate(FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE)
 });
@@ -361,8 +369,6 @@ $circular.on('click', () => {
                             <input type="number" id="caudal" autocomplete="off"> <br> <br>
                             <strong>D (m): </strong>
                             <input type="number" id="diametro" autocomplete="off"> <br> <br>
-                            <strong>tetha: </strong>
-                            <p>1.265</p> <br> <br>
                             <button type="submit" id="send">CALCULAR</button> 
                         </form>   
         
@@ -400,87 +406,27 @@ $send.on('click', () => {
         console.log(tetha) 
     }
     
-    let Yc = (diametro/2)*(1-Math.cos(tetha))
-    let Tc = diametro*Math.sin(Yc/2);
-    let Ac = ((diametro**2)/8)*(Yc-Math.sin(Yc))
-    let Pc = Yc*diametro/2
-    let Rc = Yc / Pc;       
-    let Dc = Ac / Tc;
-    let Vc = caudal / Ac;
-    let EE = Yc+Vc**2/(2*9.81)
-    let FO = ((9.81)*(Ac**3)*(Tc**-1)-(caudal**2)).toFixed(1)
-    console.log(FO)    
-
-    tableTemplate(FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE)
-});
-
-
-});
-
-$parabolico.on('click', () => {
-    let parabolico = "";
-    parabolico +=`<form>
-                            <h2>Input:</h2>
-                            <strong>Caudal (m3/s): </strong>
-                            <input type="number" id="caudal" autocomplete="off"> <br> <br>
-                            <strong>T: </strong>
-                            <input type="number" id="T" autocomplete="off"> <br> <br>
-                            <button type="submit" id="send">CALCULAR</button> 
-                        </form>   
-        
-                        <table class="graficas">
-                            <th>Canal parabolico:</th>
-    
-                            <tr>
-                                <td><img src="/imagenes/imagen.png"></td>
-                                <td><img src="/imagenes/imagen.png"></td>
-                            </tr>
-              
-                        </table>`
-
-    $('.input').html(parabolico);
-
-        // Asignar variables a inputs
-const $caudal = $("#caudal");
-const $T = $("#T");
-const $send = $("#send");
-
-// Evento boton
-$send.on('click', () => {
-    $("html, body").animate({ scrollTop: $('html, body').prop("scrollHeight")}, 1000) //Scroll abajo
-    event.preventDefault();
-    const caudal = parseFloat($caudal.val());
-    const T = parseFloat($T.val());    
-
-    function f(x) {
-        return(9.81*((2/3)*T*x)**3*T**-1-caudal**2)
-    }
-    
-    function Df(x){
-        return(9.81*(2*T*((2/3)*T*x)**2))
-    }
-
-    let x0 = 1
-     
-    for (let i = 1 ; i < 20 ; i++ ){
-        let x1 = x0-f(x0)/Df(x0);
-        x0 = x1;
-        (eval("Yc="+x0))
-        console.log(Yc)
-    }
-
-    let Tc = T;
-    let Ac = (2/3)*T*Yc;
-    let Pc = Tc + ((8/3)*(Yc**2/Tc));
+    let Yc = (diametro/2)*(1-Math.cos(tetha));
+    let tetha2 = 2*Math.acos(1-2*Yc/diametro);
+    let Tc = diametro*Math.sin(tetha2/2);
+    let Ac = ((diametro**2)/8)*(tetha2-Math.sin(tetha2));
+    let Pc = tetha2*diametro/2
     let Rc = Ac / Pc;       
     let Dc = Ac / Tc;
     let Vc = caudal / Ac;
     let EE = Yc+Vc**2/(2*9.81)
     let FO = ((9.81)*(Ac**3)*(Tc**-1)-(caudal**2)).toFixed(1)
-    
+    if (Math.sign(FO)===-1 || Math.sign(FO)===-0){
+        FO = FO * (-1);
+    } else {return(FO)}
+    console.log(tetha2)
+    $('form').append(`<h3>tetha: 
+        <p>${tetha2}</p></h3>`);    
 
     tableTemplate(FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE)
 });
+
+
 });
 
 function tableTemplate (FO, Yc, Ac, Pc, Rc, Dc, Tc, Vc, EE){
